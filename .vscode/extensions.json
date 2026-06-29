@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "editorConfig.editorConfig",
+    "vue.volar",
+    "antfu.unocss",
+    "antfu.iconify",
+    "wot-ui.wot-ui-intellisense",
+    "dbaeumer.vscode-eslint"
+  ]
+}
