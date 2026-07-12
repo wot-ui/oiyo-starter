@@ -1,12 +1,15 @@
 import { definePagesConfig } from '@skiyee/oiyo/config'
 
-// https://oiyo.js.org/docs/api/config/define-pages-config
+/**
+ * 页面配置
+ * @see https://oiyo.js.org/docs/api/config/define-pages-config
+ */
 export default definePagesConfig({
   globalStyle: {
     // 导航栏配置（颜色变量来自 theme.json）
     navigationBarBackgroundColor: '@navBgColor',
     navigationBarTextStyle: '@navTxtStyle',
-    navigationBarTitleText: 'Oiyo Wot Starter',
+    navigationBarTitleText: 'Oiyo Starter',
 
     // 页面背景配置
     backgroundColor: '@bgColor',

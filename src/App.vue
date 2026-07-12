@@ -1,29 +1,93 @@
 <script setup lang="ts">
-import type { ConfigProviderProps } from '@wot-ui/ui/components/wd-config-provider/types'
+import type { RootContext } from '~/types/root-context'
 
-const { themeVars, theme, buttonConfig } = defineRootContext(() => {
-  const { themeVars, theme } = useManualTheme()
-
-  const buttonConfig: ConfigProviderProps['button'] = {
+/**
+ * 全局根部上下文
+ * @see https://oiyo.js.org/docs/manual/shell/root-context
+ */
+const { theme, buttonConfig, toast, loading, dialog } = defineRootContext<RootContext>(() => {
+  const buttonConfig = {
     size: 'large',
-  }
+  } as const
+
+  const theme = useThemeStore()
+  const toast = createGlobalToast()
+  const loading = createGlobalLoading()
+  const dialog = createGlobalDialog()
 
   return {
-    themeVars,
     theme,
     buttonConfig,
+    toast,
+    loading,
+    dialog,
   }
 })
+
+onLaunch(() => {
+  if (typeof uni !== 'undefined' && uni.onThemeChange) {
+    const themeChangeHandler: UniNamespace.OnThemeChangeCallback = (res) => {
+      if (theme.followSystem && res.theme) {
+        theme.toggleTheme(res.theme, true)
+      }
+    }
+
+    uni.onThemeChange(themeChangeHandler)
+  }
+})
+
+const toastHost = useToast('global')
+const dialogHost = useDialog('global')
+
+watch(
+  toast.toastOptions,
+  (options) => {
+    options.show ? toastHost.show(options) : toastHost.close()
+  },
+  { deep: true },
+)
+
+watch(
+  loading.loadingOptions,
+  (options) => {
+    options.show ? toastHost.show(options) : toastHost.close()
+  },
+  { deep: true },
+)
+
+watch(
+  dialog.dialogOptions,
+  (options) => {
+    if (!options) {
+      dialogHost.close()
+      return
+    }
+
+    const { success, fail, ...dialogOptions } = options
+    dialogHost.show(dialogOptions)
+      .then(res => success?.(res))
+      .catch(res => fail?.(res))
+      .finally(() => dialog.close())
+  },
+  { deep: true },
+)
 </script>
 
 <template>
-  <WdConfigProvider :theme-vars="themeVars" :theme="theme" :button="buttonConfig" :custom-class="`page-wrapper ${theme}`">
+  <WdConfigProvider
+    :theme-vars="theme.themeVars"
+    :theme="theme.theme"
+    :button="buttonConfig"
+    :custom-class="`page-wrapper ${theme}`"
+  >
+    <!-- @see https://oiyo.js.org/docs/manual/shell/app-shell -->
     <OiyoLayout>
       <OiyoPage />
     </OiyoLayout>
+
     <WdNotify />
-    <WdDialog />
-    <WdToast />
+    <WdDialog selector="global" />
+    <WdToast selector="global" />
   </WdConfigProvider>
 </template>
 

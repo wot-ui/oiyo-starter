@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * 页面元信息
+ * @see https://oiyo.js.org/docs/manual/page/meta
+ */
 definePageMeta({
   name: 'demo-string',
   style: {
@@ -36,7 +40,7 @@ function pushToObject() {
     </view>
 
     <!-- 跳转信息 -->
-    <demo-block title="跳转信息" transparent>
+    <DemoBlock title="跳转信息" transparent>
       <view class="rounded-3 p-4 wot-bg-filled-oppo">
         <view class="mb-3 text-4 font-bold wot-text-text-main">
           当前页面信息
@@ -68,18 +72,18 @@ function pushToObject() {
           </view>
         </view>
       </view>
-    </demo-block>
+    </DemoBlock>
 
     <!-- 操作按钮 -->
-    <demo-block title="继续演示" transparent>
+    <DemoBlock title="继续演示" transparent>
       <view class="space-y-3">
-        <wd-button type="primary" block @click="pushToObject">
+        <WdButton type="primary" block @click="pushToObject">
           跳转到对象路径演示
-        </wd-button>
-        <wd-button type="warning" block @click="goBack">
+        </WdButton>
+        <WdButton type="warning" block @click="goBack">
           返回上一页
-        </wd-button>
+        </WdButton>
       </view>
-    </demo-block>
+    </DemoBlock>
   </view>
 </template>

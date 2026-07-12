@@ -2,7 +2,7 @@
   "globalStyle": {
     "navigationBarBackgroundColor": "@navBgColor",
     "navigationBarTextStyle": "@navTxtStyle",
-    "navigationBarTitleText": "Oiyo Wot Starter",
+    "navigationBarTitleText": "Oiyo Starter",
     "backgroundColor": "@bgColor",
     "backgroundTextStyle": "@bgTxtStyle",
     "backgroundColorTop": "@bgColorTop",
@@ -23,12 +23,17 @@
       {
         "pagePath": "pages/home/index",
         "index": 0
+      },
+      {
+        "pagePath": "pages/about/index",
+        "index": 1
       }
     ]
   },
   "pages": [
     {
       "path": "pages/home/index",
+      "type": "home",
       "name": "home",
       "layout": "tabbar",
       "style": {
@@ -37,12 +42,75 @@
       "tab": {
         "index": 0
       }
+    },
+    {
+      "path": "pages/about/index",
+      "name": "about",
+      "layout": "tabbar",
+      "style": {
+        "navigationBarTitleText": "关于"
+      },
+      "tab": {
+        "index": 1
+      }
     }
   ],
   "subPackages": [
     {
+      "root": "packages/async-echarts",
+      "pages": [
+        {
+          "path": "index",
+          "name": "echartsAsync",
+          "style": {
+            "navigationBarTitleText": "echarts 异步跨包示例"
+          }
+        }
+      ]
+    },
+    {
+      "root": "packages/echarts",
+      "pages": [
+        {
+          "path": "index",
+          "name": "echarts",
+          "style": {
+            "navigationBarTitleText": "Echarts 演示"
+          }
+        }
+      ]
+    },
+    {
       "root": "packages/features",
       "pages": [
+        {
+          "path": "ci/index",
+          "name": "ci",
+          "style": {
+            "navigationBarTitleText": "CI 持续集成"
+          }
+        },
+        {
+          "path": "feedback/index",
+          "name": "feedback",
+          "style": {
+            "navigationBarTitleText": "全局反馈"
+          }
+        },
+        {
+          "path": "icon/index",
+          "name": "icon",
+          "style": {
+            "navigationBarTitleText": "图标演示"
+          }
+        },
+        {
+          "path": "pinia/index",
+          "name": "pinia",
+          "style": {
+            "navigationBarTitleText": "Pinia 演示"
+          }
+        },
         {
           "path": "router/demo-aftereach",
           "name": "demo-aftereach",
@@ -97,6 +165,23 @@
           "name": "router",
           "style": {
             "navigationBarTitleText": "路由管理"
+          }
+        },
+        {
+          "path": "skills/index",
+          "name": "skills",
+          "layout": "default",
+          "style": {
+            "navigationBarTitleText": "Agent Skills",
+            "navigationBarBackgroundColor": "#f9fafb",
+            "navigationBarTextStyle": "black"
+          }
+        },
+        {
+          "path": "styles/index",
+          "name": "styles",
+          "style": {
+            "navigationBarTitleText": "UnoCSS 演示"
           }
         }
       ]

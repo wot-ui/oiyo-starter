@@ -10,15 +10,11 @@
     "build:h5:staging": "oiyo build h5 --mode staging",
     "build:h5:production": "oiyo build h5 --mode production",
     "typecheck": "vue-tsc --noEmit",
-    "postinstall": "oiyo prepare",
-    "alova-gen": "alova gen -f"
+    "postinstall": "oiyo prepare"
   },
   "dependencies": {
-    "@alova/adapter-uniapp": "^2.0.16",
-    "@alova/mock": "^2.0.20",
     "@skiyee/oiyo": "latest",
     "@wot-ui/ui": "^2.1.0",
-    "alova": "^3.5.1",
     "echarts": "^6.0.0",
     "pinia": "2.3.1",
     "uni-echarts": "^2.2.5"
@@ -34,7 +30,6 @@
     "sass": "^1.99.0",
     "typescript": "^5.9.3",
     "uni-unocss": "^1.0.2",
-    "unocss": "^66.0.0",
     "vite": "5.2.8",
     "vue-tsc": "^3.2.7"
   },

@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * 页面元信息
+ * @see https://oiyo.js.org/docs/manual/page/meta
+ */
 definePageMeta({
   name: 'demo-guard',
   style: {
@@ -43,7 +47,7 @@ function demoAfterEachPage() {
     </view>
 
     <!-- 守卫演示 -->
-    <demo-block title="守卫演示" transparent>
+    <DemoBlock title="守卫演示" transparent>
       <view class="space-y-3">
         <view class="rounded-2 p-4 wot-bg-filled-oppo">
           <view class="mb-3 text-4 font-bold wot-text-text-main">
@@ -52,9 +56,9 @@ function demoAfterEachPage() {
           <view class="mb-3 text-3.5 wot-text-text-secondary">
             跳转前交互，可以拦截导航
           </view>
-          <wd-button type="error" block @click="handleBeforeEach">
+          <WdButton type="error" block @click="handleBeforeEach">
             📊 beforeEach 演示
-          </wd-button>
+          </WdButton>
         </view>
 
         <view class="rounded-2 p-4 wot-bg-filled-oppo">
@@ -64,20 +68,20 @@ function demoAfterEachPage() {
           <view class="mb-3 text-3.5 wot-text-text-secondary">
             跳转到专门的 afterEach 演示页面，体验页面统计、埋点上报等功能
           </view>
-          <wd-button type="success" block @click="demoAfterEachPage">
+          <WdButton type="success" block @click="demoAfterEachPage">
             📊 afterEach 演示
-          </wd-button>
+          </WdButton>
         </view>
       </view>
-    </demo-block>
+    </DemoBlock>
 
     <!-- 操作按钮 -->
-    <demo-block title="导航" transparent>
+    <DemoBlock title="导航" transparent>
       <view class="px-3">
-        <wd-button type="warning" block @click="goBack">
+        <WdButton type="warning" block @click="goBack">
           返回上一页
-        </wd-button>
+        </WdButton>
       </view>
-    </demo-block>
+    </DemoBlock>
   </view>
 </template>

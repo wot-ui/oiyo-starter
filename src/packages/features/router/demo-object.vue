@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * 页面元信息
+ * @see https://oiyo.js.org/docs/manual/page/meta
+ */
 definePageMeta({
   name: 'demo-object',
   style: {
@@ -40,7 +44,7 @@ function pushToQuery() {
     </view>
 
     <!-- 跳转信息 -->
-    <demo-block title="跳转信息" transparent>
+    <DemoBlock title="跳转信息" transparent>
       <view class="rounded-3 p-4 wot-bg-filled-oppo">
         <view class="mb-3 text-4 font-bold wot-text-text-main">
           当前页面信息
@@ -72,10 +76,10 @@ function pushToQuery() {
           </view>
         </view>
       </view>
-    </demo-block>
+    </DemoBlock>
 
     <!-- 参数传递演示 -->
-    <demo-block title="参数传递演示" transparent>
+    <DemoBlock title="参数传递演示" transparent>
       <view class="space-y-3">
         <view class="rounded-2 p-4 wot-bg-filled-oppo">
           <view class="mb-3 text-4 font-bold wot-text-text-main">
@@ -89,9 +93,9 @@ function pushToQuery() {
               router.push({ name: 'demo-params', params: { username: 'eduardo' } })
             </text>
           </view>
-          <wd-button type="primary" block @click="pushToParams">
+          <WdButton type="primary" block @click="pushToParams">
             跳转并传递 params
-          </wd-button>
+          </WdButton>
         </view>
 
         <view class="rounded-2 p-4 wot-bg-filled-oppo">
@@ -106,18 +110,18 @@ function pushToQuery() {
               router.push({ path: '/demo-query', query: { keyword: 'vue' } })
             </text>
           </view>
-          <wd-button type="success" block @click="pushToQuery">
+          <WdButton type="success" block @click="pushToQuery">
             跳转并传递 query
-          </wd-button>
+          </WdButton>
         </view>
       </view>
-    </demo-block>
+    </DemoBlock>
 
     <!-- 操作按钮 -->
-    <demo-block title="导航" transparent>
-      <wd-button type="warning" block @click="goBack">
+    <DemoBlock title="导航" transparent>
+      <WdButton type="warning" block @click="goBack">
         返回上一页
-      </wd-button>
-    </demo-block>
+      </WdButton>
+    </DemoBlock>
   </view>
 </template>

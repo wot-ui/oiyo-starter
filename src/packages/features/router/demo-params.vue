@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * 页面元信息
+ * @see https://oiyo.js.org/docs/manual/page/meta
+ */
 definePageMeta({
   name: 'demo-params',
   style: {
@@ -55,7 +59,7 @@ function pushToGuard() {
     </view>
 
     <!-- 路由信息 -->
-    <demo-block title="当前路由信息" transparent>
+    <DemoBlock title="当前路由信息" transparent>
       <view class="rounded-3 p-4 wot-bg-filled-oppo">
         <view class="space-y-2">
           <view class="flex items-center justify-between border-b py-2 wot-border-border-main">
@@ -84,10 +88,10 @@ function pushToGuard() {
           </view>
         </view>
       </view>
-    </demo-block>
+    </DemoBlock>
 
     <!-- 参数信息 -->
-    <demo-block title="接收到的参数" transparent>
+    <DemoBlock title="接收到的参数" transparent>
       <view class="space-y-3">
         <view class="rounded-2 p-4 wot-bg-filled-oppo">
           <view class="mb-3 text-4 font-bold wot-text-text-main">
@@ -114,10 +118,10 @@ function pushToGuard() {
           </view>
         </view>
       </view>
-    </demo-block>
+    </DemoBlock>
 
     <!-- API 说明 -->
-    <demo-block title="API 说明" transparent>
+    <DemoBlock title="API 说明" transparent>
       <view class="rounded-2 p-4 wot-bg-filled-oppo">
         <view class="mb-3 text-4 font-bold wot-text-text-main">
           Params vs Query 的区别
@@ -142,10 +146,10 @@ function pushToGuard() {
           </text>
         </view>
       </view>
-    </demo-block>
+    </DemoBlock>
 
     <!-- 代码示例 -->
-    <demo-block title="代码示例" transparent>
+    <DemoBlock title="代码示例" transparent>
       <view class="rounded-2 p-4 wot-bg-filled-oppo">
         <view class="mb-3 text-4 font-bold wot-text-text-main">
           接收参数的标准写法
@@ -165,18 +169,18 @@ function pushToGuard() {
           </text>
         </view>
       </view>
-    </demo-block>
+    </DemoBlock>
 
     <!-- 操作按钮 -->
-    <demo-block title="继续演示" transparent>
+    <DemoBlock title="继续演示" transparent>
       <view class="space-y-3">
-        <wd-button type="primary" block @click="pushToGuard">
+        <WdButton type="primary" block @click="pushToGuard">
           跳转到导航守卫演示
-        </wd-button>
-        <wd-button type="warning" block @click="goBack">
+        </WdButton>
+        <WdButton type="warning" block @click="goBack">
           返回上一页
-        </wd-button>
+        </WdButton>
       </view>
-    </demo-block>
+    </DemoBlock>
   </view>
 </template>

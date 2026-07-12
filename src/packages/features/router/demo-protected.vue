@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * 页面元信息
+ * @see https://oiyo.js.org/docs/manual/page/meta
+ */
 definePageMeta({
   name: 'demo-protected',
   style: {
@@ -31,7 +35,7 @@ function goBack() {
     </view>
 
     <!-- 内容 -->
-    <demo-block title="守卫拦截成功" transparent>
+    <DemoBlock title="守卫拦截成功" transparent>
       <view class="border border-green-200 rounded-2 bg-green-50 p-4 dark:bg-green-900/20">
         <view class="mb-2 text-4 text-green-700 font-bold dark:text-green-300">
           🎉 恭喜！
@@ -42,13 +46,13 @@ function goBack() {
           守卫应该会拦截并重定向你到首页。
         </view>
       </view>
-    </demo-block>
+    </DemoBlock>
 
     <!-- 操作按钮 -->
-    <demo-block title="导航" transparent>
-      <wd-button type="warning" block @click="goBack">
+    <DemoBlock title="导航" transparent>
+      <WdButton type="warning" block @click="goBack">
         返回上一页
-      </wd-button>
-    </demo-block>
+      </WdButton>
+    </DemoBlock>
   </view>
 </template>

@@ -1,14 +1,6 @@
-/*
- * @Author: weisheng
- * @Date: 2025-09-02 09:42:36
- * @LastEditTime: 2026-04-10 11:01:37
- * @LastEditors: weisheng
- * @Description:
- * @FilePath: /wot-starter/src/composables/types/theme.ts
- * 记得注释
- */
 import type { ConfigProviderThemeVars } from '@wot-ui/ui'
 
+/** Primary shade keys (primary1 ~ primary10) */
 export type PrimaryShadeKey
   = | 'primary1'
     | 'primary2'
@@ -23,26 +15,20 @@ export type PrimaryShadeKey
 
 export type ThemePrimaryShades = Record<PrimaryShadeKey, string>
 
-/**
- * 主题色选项接口
- */
+/** light / dark */
+export type ThemeMode = 'light' | 'dark'
+
+/** Theme color option */
 export interface ThemeColorOption {
   name: string;
   value: string;
-  // 主色 6，用于列表和当前主题色圆点展示
+  /** Primary color (~primary6) for swatch display */
   primary: string;
-  // 完整主色阶，用于注入 ConfigProvider 主题变量
+  /** Full primary scale for ConfigProvider themeVars */
   primaryShades: ThemePrimaryShades;
 }
 
-/**
- * 主题类型
- */
-export type ThemeMode = 'light' | 'dark'
-
-/**
- * 主题状态接口
- */
+/** Theme store state */
 export interface ThemeState {
   theme: ThemeMode;
   followSystem: boolean;
@@ -51,17 +37,6 @@ export interface ThemeState {
   themeVars: ConfigProviderThemeVars;
 }
 
-/**
- * 系统主题状态接口（简化版）
- */
-export interface SystemThemeState {
-  theme: ThemeMode;
-  themeVars: ConfigProviderThemeVars;
-}
-
-/**
- * 预定义的主题色选项
- */
 export const themeColorOptions: ThemeColorOption[] = [
   {
     name: '默认蓝',
@@ -166,3 +141,5 @@ export const themeColorOptions: ThemeColorOption[] = [
     },
   },
 ]
+
+export const defaultThemeColor = themeColorOptions[0]!

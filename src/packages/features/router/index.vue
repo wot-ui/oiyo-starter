@@ -1,4 +1,10 @@
 <script setup lang="ts">
+import type { RootContext } from '~/types/root-context'
+
+/**
+ * 页面元信息
+ * @see https://oiyo.js.org/docs/manual/page/meta
+ */
 definePageMeta({
   name: 'router',
   style: {
@@ -6,7 +12,11 @@ definePageMeta({
   },
 })
 
-const { success: showSuccess } = useGlobalToast()
+/**
+ * 消费全局根部上下文
+ * @see https://oiyo.js.org/docs/manual/shell/root-context
+ */
+const { toast } = useRootContext<RootContext>()
 const router = useRouter()
 const route = useRoute()
 
@@ -20,19 +30,19 @@ const userLabel = ref('小熊熊')
 function pushByString() {
   // 字符串路径
   router.push('/packages/features/router/demo-string')
-  showSuccess({ msg: '使用字符串路径跳转' })
+  toast.success({ msg: '使用字符串路径跳转' })
 }
 
 function pushByPath() {
   // 带有路径的对象
   router.push({ path: '/packages/features/router/demo-object' })
-  showSuccess({ msg: '使用path对象跳转' })
+  toast.success({ msg: '使用path对象跳转' })
 }
 
 function pushByName() {
   // 命名的路由
   router.push({ name: 'demo-object' })
-  showSuccess({ msg: '使用name跳转' })
+  toast.success({ msg: '使用name跳转' })
 }
 
 // 参数传递示例
@@ -46,7 +56,7 @@ function pushWithParams() {
   }
   // 命名的路由，并加上参数
   router.push({ name: 'demo-params', params: { username: userId.value } })
-  showSuccess({ msg: `传递参数: ${userId.value}` })
+  toast.success({ msg: `传递参数: ${userId.value}` })
 }
 
 function pushWithQuery() {
@@ -59,7 +69,7 @@ function pushWithQuery() {
   }
   // 带查询参数
   router.push({ path: '/packages/features/router/demo-query', query: { username: searchKeyword.value } })
-  showSuccess({ msg: `传递查询参数: ${searchKeyword.value}` })
+  toast.success({ msg: `传递查询参数: ${searchKeyword.value}` })
 }
 
 // 传递对象参数
@@ -73,7 +83,7 @@ function pushWithObjectParams() {
     name: 'demo-params',
     params: { user: encodeURIComponent(JSON.stringify(user)) },
   })
-  showSuccess({ msg: '传递对象参数(params)' })
+  toast.success({ msg: '传递对象参数(params)' })
 }
 
 function pushWithObjectQuery() {
@@ -86,12 +96,12 @@ function pushWithObjectQuery() {
     path: '/packages/features/router/demo-query',
     query: { user: encodeURIComponent(JSON.stringify(user)) },
   })
-  showSuccess({ msg: '传递对象参数(query)' })
+  toast.success({ msg: '传递对象参数(query)' })
 }
 
 // 导航守卫演示
 function demoNavigationGuards() {
-  showSuccess({ msg: '跳转到完整的导航守卫演示页面' })
+  toast.success({ msg: '跳转到完整的导航守卫演示页面' })
   router.push({
     name: 'demo-guard',
   })
@@ -100,27 +110,27 @@ function demoNavigationGuards() {
 // Router方法演示
 function demoPush() {
   router.push('/packages/features/router/demo-string')
-  showSuccess({ msg: 'router.push() - 保留当前页面跳转' })
+  toast.success({ msg: 'router.push() - 保留当前页面跳转' })
 }
 
 function demoPushTab() {
-  router.pushTab('/pages/index/index')
-  showSuccess({ msg: 'router.pushTab() - 跳转到tabBar页面' })
+  router.pushTab('/pages/home/index')
+  toast.success({ msg: 'router.pushTab() - 跳转到tabBar页面' })
 }
 
 function demoReplace() {
   router.replace('/packages/features/router/demo-object')
-  showSuccess({ msg: 'router.replace() - 替换当前页面' })
+  toast.success({ msg: 'router.replace() - 替换当前页面' })
 }
 
 function demoReplaceAll() {
-  router.replaceAll('/pages/index/index')
-  showSuccess({ msg: 'router.replaceAll() - 关闭所有页面重新开始' })
+  router.replaceAll('/pages/home/index')
+  toast.success({ msg: 'router.replaceAll() - 关闭所有页面重新开始' })
 }
 
 function demoBack() {
   router.back()
-  showSuccess({ msg: 'router.back() - 返回上一页' })
+  toast.success({ msg: 'router.back() - 返回上一页' })
 }
 
 // 复制代码到剪贴板
@@ -130,7 +140,7 @@ function copyCode(code: string) {
     showToast: false,
     success: () => {
       uni.hideToast()
-      showSuccess({ msg: '代码已复制到剪贴板' })
+      toast.success({ msg: '代码已复制到剪贴板' })
     },
   })
 }
@@ -146,7 +156,7 @@ function handleNavigate(url: string) {
     showToast: false,
     success: () => {
       uni.hideToast()
-      showSuccess({ msg: `${url} 已复制到剪贴板` })
+      toast.success({ msg: `${url} 已复制到剪贴板` })
     },
   })
   // #endif
@@ -162,7 +172,7 @@ function handleNavigate(url: string) {
           🚀
         </view>
         <view class="mb-2 text-6 font-bold wot-text-text-main">
-          @wot-ui/router
+          Uni Router
         </view>
         <view class="mb-2 text-3.5 leading-relaxed wot-text-text-secondary">
           轻量级路由管理解决方案
@@ -349,7 +359,7 @@ function handleNavigate(url: string) {
           ⚠️ 重要提示
         </view>
         <view class="text-3 text-orange-600 leading-relaxed dark:text-orange-200">
-          在 @wot-ui/router 中，params 和 query 参数都会以查询字符串形式放在 URL 中，两者在实际效果上并无区别。这种 API 设计主要是为了与 vue-router 保持一致。
+          在 Uni Router 中，params 和 query 参数都会以查询字符串形式放在 URL 中，两者在实际效果上并无区别。这种 API 设计主要是为了与 vue-router 保持一致。
         </view>
       </view>
       <view class="space-y-3">
@@ -460,8 +470,8 @@ function handleNavigate(url: string) {
     <!-- 相关链接 -->
     <DemoBlock title="相关链接" transparent>
       <WdCellGroup border custom-class="rounded-2! overflow-hidden">
-        <WdCell title="📚 @wot-ui/router 文档" value="路由管理" is-link @click="handleNavigate('https://moonofweisheng.github.io/@wot-ui/router/')" />
-        <WdCell title="🐙 GitHub 仓库" value="@wot-ui/router" is-link @click="handleNavigate('https://my-uni.wot-ui.cn/')" />
+        <WdCell title="📚 Uni Router 文档" value="路由管理" is-link @click="handleNavigate('https://moonofweisheng.github.io/Uni Router/')" />
+        <WdCell title="🐙 GitHub 仓库" value="Uni Router" is-link @click="handleNavigate('https://my-uni.wot-ui.cn/')" />
         <WdCell title="📖 uni-app 路由文档" value="页面路由" is-link @click="handleNavigate('https://uniapp.dcloud.net.cn/tutorial/page.html')" />
       </WdCellGroup>
     </DemoBlock>

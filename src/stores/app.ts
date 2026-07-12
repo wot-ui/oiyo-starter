@@ -1,5 +1,5 @@
 export const useAppStore = defineStore('oiyo-app', () => {
-  const title = ref('oiyo-wot-starter')
+  const title = ref('oiyo-starter')
 
   return { title }
 }, {

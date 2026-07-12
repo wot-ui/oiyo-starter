@@ -1,3 +1,5 @@
+import type { RootContext } from '~/types/root-context'
+
 import { pages, subPackages } from '~/pages.json'
 
 function generateRoutes() {
@@ -31,11 +33,15 @@ router.beforeEach((to, from, next) => {
 
   // 演示：对受保护页面的简单拦截
   if (to.name === 'demo-protected') {
-    const { confirm: showConfirm } = useGlobalDialog()
+    /**
+     * 消费全局根部上下文
+     * @see https://oiyo.js.org/docs/manual/shell/root-context
+     */
+    const { dialog } = useRootContext<RootContext>()
     console.log('🛡️ 检测到访问受保护页面')
 
     return new Promise<void>((resolve, reject) => {
-      showConfirm({
+      dialog.confirm({
         title: '守卫拦截演示',
         msg: '这是一个受保护的页面，需要确认后才能访问',
         confirmButtonText: '允许访问',
@@ -59,6 +65,14 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach((to, from) => {
+  /**
+   * 消费全局根部上下文
+   * @see https://oiyo.js.org/docs/manual/shell/root-context
+   */
+  const { theme, toast } = useRootContext<RootContext>()
+
+  theme.initTheme()
+
   console.log('🎯 afterEach 钩子触发:', { to, from })
 
   // 演示：简单的页面切换记录
@@ -68,10 +82,9 @@ router.afterEach((to, from) => {
 
   // 演示：针对 afterEach 演示页面的简单提示
   if (to.name === 'demo-aftereach') {
-    const { show: showToast } = useGlobalToast()
     console.log('📊 进入 afterEach 演示页面')
     setTimeout(() => {
-      showToast('afterEach 钩子已触发！')
+      toast.show('afterEach 钩子已触发！')
     }, 500)
   }
 })

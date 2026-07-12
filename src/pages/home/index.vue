@@ -1,5 +1,13 @@
 <script setup lang="ts">
+import type { RootContext } from '~/types/root-context'
+import type { ThemeColorOption } from '~/types/theme'
+
+/**
+ * 页面元信息
+ * @see https://oiyo.js.org/docs/manual/page/meta
+ */
 definePageMeta({
+  type: 'home',
   name: 'home',
   layout: 'tabbar',
   style: {
@@ -12,26 +20,32 @@ definePageMeta({
 
 const router = useRouter()
 
-const {
-  theme,
-  toggleTheme,
-  currentThemeColor,
-  showThemeColorSheet,
-  themeColorOptions,
-  openThemeColorPicker,
-  closeThemeColorPicker,
-  selectThemeColor,
-  setFollowSystem,
-} = useManualTheme()
+const { theme, toast } = useRootContext<RootContext>()
 
 const isDark = computed({
   get() {
-    return theme.value === 'dark'
+    return theme.theme === 'dark'
   },
   set() {
-    toggleTheme()
+    theme.toggleTheme()
   },
 })
+
+const showThemeColorSheet = ref(false)
+
+function openThemeColorPicker() {
+  showThemeColorSheet.value = true
+}
+
+function closeThemeColorPicker() {
+  showThemeColorSheet.value = false
+}
+
+// 处理主题色选择
+function handleThemeColorSelect(option: ThemeColorOption) {
+  theme.setThemeColor(option)
+  closeThemeColorPicker()
+}
 
 // 页面跳转方法
 function navigateTo(name: string) {
@@ -40,13 +54,20 @@ function navigateTo(name: string) {
   })
 }
 
-// 处理主题色选择
-function handleThemeColorSelect(option: any) {
-  selectThemeColor(option)
-}
-
 function openUrl(url: string) {
+  // #ifdef H5
   window.open(url, '_blank')
+  // #endif
+  // #ifdef MP
+  uni.setClipboardData({
+    data: url,
+    showToast: false,
+    success: () => {
+      uni.hideToast()
+      toast.success({ msg: `网址 ${url} 已复制到剪贴板` })
+    },
+  })
+  // #endif
 }
 </script>
 
@@ -70,7 +91,7 @@ function openUrl(url: string) {
           <WdSwitch v-model="isDark" size="18px" />
         </WdCell>
         <WdCell title="跟随系统">
-          <WdButton size="small" @click="setFollowSystem">
+          <WdButton size="small" @click="theme.setFollowSystem(true)">
             跟随系统
           </WdButton>
         </WdCell>
@@ -78,9 +99,9 @@ function openUrl(url: string) {
           <view class="flex items-center justify-end gap-2">
             <view
               class="h-4 w-4 rounded-full"
-              :style="{ backgroundColor: currentThemeColor.primary }"
+              :style="{ backgroundColor: theme.currentThemeColor.primary }"
             />
-            <text>{{ currentThemeColor.name }}</text>
+            <text>{{ theme.currentThemeColor.name }}</text>
           </view>
         </WdCell>
       </WdCellGroup>
@@ -91,6 +112,12 @@ function openUrl(url: string) {
         <WdCell title="🍊 Oiyo 框架" is-link @click="openUrl('https://oiyo.js.org/')" />
         <WdCell title="🧩 WotUI 组件库" is-link @click="openUrl('https://wot-ui.cn/')" />
         <WdCell title="🚦 Router 路由管理" is-link @click="navigateTo('router')" />
+        <WdCell title="🎨 Icon 图标" is-link @click="navigateTo('icon')" />
+        <WdCell title="✨ Unocss 原子化" is-link @click="navigateTo('styles')" />
+        <WdCell title="🍍 Pinia 持久化" is-link @click="navigateTo('pinia')" />
+        <WdCell title="💬 Fedback 反馈组件" is-link @click="navigateTo('feedback')" />
+        <WdCell title="🔄 CI/CD 持续集成" is-link @click="navigateTo('ci')" />
+        <WdCell title="📊 Uni Echarts 图表" is-link @click="navigateTo('echarts')" />
       </WdCellGroup>
     </DemoBlock>
 
@@ -118,7 +145,7 @@ function openUrl(url: string) {
             </text>
           </view>
           <WdIcon
-            v-if="currentThemeColor.value === option.value"
+            v-if="theme.currentThemeColor.value === option.value"
             name="check"
             :color="option.primary"
             size="20px"

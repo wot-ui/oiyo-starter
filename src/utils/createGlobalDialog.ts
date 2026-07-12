@@ -1,15 +1,8 @@
 import type { DialogOptions, DialogResult } from '@wot-ui/ui/components/wd-dialog/types'
 
-import { defineStore } from 'pinia'
-
 export type GlobalDialogOptions = DialogOptions & {
   success?: (res: DialogResult) => void;
   fail?: (res: DialogResult) => void;
-}
-
-interface GlobalDialog {
-  dialogOptions: GlobalDialogOptions | null;
-  currentPage: string;
 }
 
 type DialogType = NonNullable<DialogOptions['type']>
@@ -64,13 +57,23 @@ function withDefaultTypeOptions(option: GlobalDialogOptions, type?: DialogType):
 function normalizeDialogOptions(option: GlobalDialogOptions, type?: DialogType): GlobalDialogOptions {
   const next = withDefaultTypeOptions(option, type)
 
-  next.confirmButtonProps = normalizeButtonProps(next.confirmButtonProps, next.confirmButtonText) as DialogOptions['confirmButtonProps']
+  next.confirmButtonProps = normalizeButtonProps(
+    next.confirmButtonProps,
+    next.confirmButtonText,
+  ) as DialogOptions['confirmButtonProps']
 
   if (next.showCancelButton === false) {
     next.cancelButtonProps = null
   }
-  else if (next.showCancelButton === true || next.cancelButtonProps !== undefined || next.cancelButtonText) {
-    next.cancelButtonProps = normalizeButtonProps(next.cancelButtonProps, next.cancelButtonText) as DialogOptions['cancelButtonProps']
+  else if (
+    next.showCancelButton === true
+    || next.cancelButtonProps !== undefined
+    || next.cancelButtonText
+  ) {
+    next.cancelButtonProps = normalizeButtonProps(
+      next.cancelButtonProps,
+      next.cancelButtonText,
+    ) as DialogOptions['cancelButtonProps']
   }
 
   return next
@@ -80,28 +83,44 @@ function normalizeOption(option: GlobalDialogOptions | string, type?: DialogType
   return normalizeDialogOptions(CommonUtil.isString(option) ? { title: option } : option, type)
 }
 
-export const useGlobalDialog = defineStore('global-Dialog', {
-  state: (): GlobalDialog => ({
-    dialogOptions: null,
-    currentPage: '',
-  }),
-  actions: {
-    show(option: GlobalDialogOptions | string, type?: DialogType) {
-      this.currentPage = getCurrentPath()
-      this.dialogOptions = normalizeOption(option, type)
-    },
-    alert(option: GlobalDialogOptions | string) {
-      this.show(option, 'alert')
-    },
-    confirm(option: GlobalDialogOptions | string) {
-      this.show(option, 'confirm')
-    },
-    prompt(option: GlobalDialogOptions | string) {
-      this.show(option, 'prompt')
-    },
-    close() {
-      this.dialogOptions = null
-      this.currentPage = ''
-    },
-  },
-})
+/**
+ * 全局弹窗控制器
+ */
+export function createGlobalDialog() {
+  const dialogOptions = ref<GlobalDialogOptions | null>(null)
+  const currentPage = ref('')
+
+  function show(option: GlobalDialogOptions | string, type?: DialogType) {
+    currentPage.value = getCurrentPath()
+    dialogOptions.value = normalizeOption(option, type)
+  }
+
+  function alert(option: GlobalDialogOptions | string) {
+    show(option, 'alert')
+  }
+
+  function confirm(option: GlobalDialogOptions | string) {
+    show(option, 'confirm')
+  }
+
+  function prompt(option: GlobalDialogOptions | string) {
+    show(option, 'prompt')
+  }
+
+  function close() {
+    dialogOptions.value = null
+    currentPage.value = ''
+  }
+
+  return {
+    dialogOptions,
+    currentPage,
+    show,
+    alert,
+    confirm,
+    prompt,
+    close,
+  }
+}
+
+export type GlobalDialog = ReturnType<typeof createGlobalDialog>

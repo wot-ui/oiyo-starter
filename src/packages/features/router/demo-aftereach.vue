@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * 页面元信息
+ * @see https://oiyo.js.org/docs/manual/page/meta
+ */
 definePageMeta({
   name: 'demo-aftereach',
   style: {
@@ -31,7 +35,7 @@ function goBack() {
     </view>
 
     <!-- 内容 -->
-    <demo-block title="afterEach 演示成功" transparent>
+    <DemoBlock title="afterEach 演示成功" transparent>
       <view class="border border-green-200 rounded-2 bg-green-50 p-4 dark:bg-green-900/20">
         <view class="mb-2 text-4 text-green-700 font-bold dark:text-green-300">
           🎉 恭喜！
@@ -42,13 +46,13 @@ function goBack() {
           afterEach 钩子常用于页面统计、埋点上报等导航后处理。
         </view>
       </view>
-    </demo-block>
+    </DemoBlock>
 
     <!-- 操作按钮 -->
-    <demo-block title="导航" transparent>
-      <wd-button type="warning" block @click="goBack">
+    <DemoBlock title="导航" transparent>
+      <WdButton type="warning" block @click="goBack">
         返回上一页
-      </wd-button>
-    </demo-block>
+      </WdButton>
+    </DemoBlock>
   </view>
 </template>

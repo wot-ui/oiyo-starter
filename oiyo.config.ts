@@ -1,22 +1,33 @@
 import { defineOiyoConfig } from '@skiyee/oiyo/config'
 
-// https://oiyo.js.org/docs/api/config/define-oiyo-config
+/**
+ * oiyo 框架配置
+ * @see https://oiyo.js.org/docs/api/config/define-oiyo-config
+ */
 export default defineOiyoConfig({
   scan: {
     components: [
       '@wot-ui/ui/components/**/*.vue',
+      {
+        from: 'uni-echarts',
+        only: [{ name: 'default', as: 'UniEcharts' }],
+      },
     ],
     apis: [
+      'apis/*.ts',
       'utils/*.ts',
-      'pinia',
       'stores/*.ts',
-      'api/*.ts',
-      'alova/client',
+      'types/*.ts',
+
+      'pinia',
       { from: '@wot-ui/ui', types: true },
       {
         from: '@wot-ui/router',
         only: ['createRouter', 'useRouter', 'useRoute'],
       },
     ],
+  },
+  ide: {
+    open: true,
   },
 })
