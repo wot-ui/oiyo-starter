@@ -37,23 +37,19 @@
 | 约定式页面 | 页面内 `definePageMeta()`，自动生成路由与 `pages.json` |
 | 布局系统 | `layouts/` + `layout` 元信息，TabBar / 默认布局开箱即用 |
 | 自动导入 | 组件、API、Store、工具函数按约定扫描，少写 import |
-| UI 与样式 | Wot UI 2.x + UnoCSS 原子化样式 |
-| 状态与图表 | Pinia 持久化、ECharts / uni-echarts 示例页 |
+| UI 与样式 | Wot UI 2.x + UniUnoCSS 原子化样式 |
+| 状态与图表 | Pinia 持久化、ECharts / UniEcharts 示例页 |
 | AI 友好 | 内置 Skills，便于 Agent 理解项目约定 |
-
----
 
 ## 技术栈
 
 - **框架**：Oiyo · UniApp · Vue 3 · TypeScript · Vite
 - **UI**：Wot UI
-- **路由**：Oiyo 内置 · @wot-ui/router 
-- **样式**：UnoCSS · SASS
-- **状态**：Pinia（含持久化插件）
-- **图表**：ECharts · uni-echarts
-- **请求**：http（Oiyo内置）
-
----
+- **请求**：OiyoHttp
+- **路由**：OiyoRouter · @wot-ui/router 
+- **样式**：UniUnoCSS · SASS
+- **状态**：Pinia · PiniaPersist
+- **图表**：ECharts · UniEcharts
 
 ## 快速开始
 
@@ -96,13 +92,24 @@ pnpm build:h5:staging
 pnpm build:h5:production
 ```
 
-## 相关链接
+## 社群
 
-| 资源 | 链接 |
-| --- | --- |
-| Oiyo 文档 | https://oiyo.js.org/ |
-| Wot UI | https://wot-ui.cn/ |
+我们提供 QQ群 让每一个开发者都能参与最直接的交流
 
+<img src="./.github/assets/qq-qrcode-1.png" alt="Qiyo 交流群" style="width: 280px; height: auto;">
+
+## 作者
+
+**sky [Skiyee]** - 切图仔、全干攻城猫、轮子砖家
+
+| 平台      | 链接                                             |
+|-----------|--------------------------------------------------|
+| 🌐 官网   | [oiyo.js.org](https://oiyo.js.org/)              |
+| 🐧 QQ     | [319619193](https://oiyo.js.org/)                |
+| 🗻 掘金   | [skiyee](https://juejin.cn/user/300614247782265) |
+| 💬 公众号 | 微信搜「天空言码」或扫码关注 ↓                   |
+
+<img src="./.github/assets/wechat-qrcode-1.png" alt="公众号二维码" width="360">
 
 ## 许可
 
