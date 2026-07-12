@@ -31,15 +31,15 @@
 
 它把页面元信息、布局、自动导入和工程约定整合在一起，让你从第一行业务代码开始，而不是从脚手架配置开始。
 
-| 能力 | 说明 |
-| --- | --- |
-| App.vue | 应用级组件编写 `<template>` 以及 管理应用级共享状态 | 
-| 约定式页面 | 页面内 `definePageMeta()`，自动生成路由与 `pages.json` |
-| 布局系统 | `layouts/` + `layout` 元信息，TabBar / 默认布局开箱即用 |
-| 自动导入 | 组件、API、Store、工具函数按约定扫描，少写 import |
-| UI 与样式 | Wot UI 2.x + UniUnoCSS 原子化样式 |
-| 状态与图表 | Pinia 持久化、ECharts / UniEcharts 示例页 |
-| AI 友好 | 内置 Skills，便于 Agent 理解项目约定 |
+| 能力       | 说明                                                    |
+|------------|---------------------------------------------------------|
+| App.vue    | 应用级组件编写 `<template>` 以及 管理应用级共享状态     |
+| 约定式页面 | 页面内 `definePageMeta()`，自动生成路由与 `pages.json`  |
+| 布局系统   | `layouts/` + `layout` 元信息，TabBar / 默认布局开箱即用 |
+| 自动导入   | 组件、API、Store、工具函数按约定扫描，少写 import       |
+| UI 与样式  | Wot UI 2.x + UniUnoCSS 原子化样式                       |
+| 状态与图表 | Pinia 持久化、ECharts / UniEcharts 示例页               |
+| AI 友好    | 内置 Skills，便于 Agent 理解项目约定                    |
 
 ## 技术栈
 
@@ -53,12 +53,12 @@
 
 ## 快速开始
 
-### 环境要求
+### 1. 环境要求
 
 - Node.js 18+
 - 包管理器推荐 pnpm < 11
 
-### 安装依赖
+### 2. 安装依赖
 
 ```bash
 pnpm install
@@ -66,23 +66,12 @@ pnpm install
 
 安装完成后会自动执行 `oiyo prepare`，生成类型与路由元数据。
 
-### 启动开发
+### 3. 开发/构建
 
 ```bash
+# 默认开发
 pnpm dev
-```
 
-按终端提示选择目标平台（H5 / 微信小程序等）。
-
-### 类型检查
-
-```bash
-pnpm typecheck
-```
-
-### 构建
-
-```bash
 # 默认构建
 pnpm build
 
@@ -91,6 +80,8 @@ pnpm build:h5:development
 pnpm build:h5:staging
 pnpm build:h5:production
 ```
+
+按终端提示选择目标平台（H5 / 微信小程序等）。
 
 ## 社群
 
@@ -111,6 +102,17 @@ pnpm build:h5:production
 
 <img src="./.github/assets/wechat-qrcode-1.png" alt="公众号二维码" width="360">
 
+## 周边
+
+| 项目                                                                 | 描述                                                |
+|----------------------------------------------------------------------|-----------------------------------------------------|
+| [oiyo](https://github.com/skiyee/oiyo)                               | 颠覆以往认知的 UniApp 增强型工程框架                |
+| [wot-ui-intellisense](https://github.com/wot-ui/wot-ui-intellisense) | wot-ui vscode 代码提示插件                          |
+| [@wot-ui/router](https://github.com/wot-ui/my-uni)                   | 一个基于 vue3 和 typescript 的轻量级 uni-app 路由库 |
+| [uni-echarts](https://uni-echarts.xiaohe.ink/)                       | 适用于 uni-app 的 echarts 组件                      |
+
 ## 许可
 
-本模板用于快速启动项目，遵循源库协议内容
+- [oiyo license](https://github.com/skiyee/oiyo/blob/main/LICENSE)
+- [wot license](https://github.com/wot-ui/wot-ui/blob/main/LICENSE)
+- [uni-echarts license](https://github.com/xiaohe0601/uni-echarts/blob/dev/LICENSE)
