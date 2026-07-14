@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { RootContext } from '~/types/root-context'
+
 
 import { defineStore } from 'pinia'
 

@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import type { RootContext } from '~/types/root-context'
-import type { ThemeColorOption } from '~/types/theme'
-
 /**
  * 页面元信息
  * @see https://oiyo.js.org/docs/manual/page/meta

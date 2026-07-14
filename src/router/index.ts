@@ -1,4 +1,4 @@
-import type { RootContext } from '~/types/root-context'
+
 
 import { pages, subPackages } from '~/pages.json'
 

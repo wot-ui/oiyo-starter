@@ -17,7 +17,7 @@ export default defineOiyoConfig({
       'apis/*.ts',
       'utils/*.ts',
       'stores/*.ts',
-      'types/*.ts',
+      { from: 'types/*.ts', types: true },
 
       'pinia',
       { from: '@wot-ui/ui', types: true },

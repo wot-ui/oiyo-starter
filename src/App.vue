@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { RootContext } from '~/types/root-context'
-
 /**
  * 全局根部上下文
  * @see https://oiyo.js.org/docs/manual/shell/root-context

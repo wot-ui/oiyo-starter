@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { RootContext } from '~/types/root-context'
+
 
 /**
  * 页面元信息
