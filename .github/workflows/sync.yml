@@ -1,0 +1,58 @@
+name: Sync Upstream
+
+on:
+  schedule:
+    - cron: '0 */4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout local
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Configure git
+        run: |
+          git config user.name "skiyee"
+          git config user.email "319619193@qq.com"
+
+      - name: Sync with upstream
+        env:
+          SOURCE_REPO: skiyee/oiyo
+          SOURCE_BRANCH: wot-starter
+          TARGET_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          REMOTE_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          SOURCE_URL="https://github.com/${SOURCE_REPO}.git"
+
+          git remote add source "$SOURCE_URL"
+          git fetch source "$SOURCE_BRANCH" --quiet
+
+          SOURCE_REF="refs/remotes/source/${SOURCE_BRANCH}"
+          TARGET_REF="refs/heads/${TARGET_BRANCH}"
+
+          if [ "$(git rev-list --count "$TARGET_REF..$SOURCE_REF")" -eq 0 ]; then
+            echo "源分支无新提交,跳过同步。"
+            exit 0
+          fi
+
+          SYNTH="synth-${GITHUB_RUN_ID}"
+          git checkout -b "$SYNTH" "$SOURCE_REF"
+
+          echo "变基源分支到 ${TARGET_BRANCH} 之上 ..."
+          git rebase "$TARGET_BRANCH" "$SYNTH" -X theirs
+
+          git checkout "$TARGET_BRANCH"
+          git merge --ff-only "$SYNTH"
+
+          git push "$REMOTE_URL" "refs/heads/${TARGET_BRANCH}"
