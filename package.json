@@ -1,5 +1,5 @@
 {
-  "name": "@oiyo-example/wot-starter",
+  "name": "@wot-ui/oiyo-starter",
   "type": "module",
   "version": "0.0.1",
   "description": "由 Oiyo 赋能的 Wot Stater 快速启动模板",
@@ -9,19 +9,15 @@
     "github": "https://github.com/skiyee",
     "gitee": "https://gitee.com/skiyee"
   },
-  "funding": "https://github.com/skiyee/oiyo-starters",
+  "funding": "https://github.com/wot-ui/oiyo-starter",
   "homepage": "https://oiyo.js.org",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/skiyee/oiyo-starters.git"
+    "url": "git+https://github.com/wot-ui/oiyo-starter.git"
   },
   "bugs": {
-    "url": "https://github.com/skiyee/oiyo-starters/issues"
+    "url": "https://github.com/wot-ui/oiyo-starter/issues"
   },
-  "files": [
-    "dist/build/h5",
-    "src/"
-  ],
   "engines": {
     "node": ">=20.19.0",
     "pnpm": ">=10.0.0 <11.0.0"
